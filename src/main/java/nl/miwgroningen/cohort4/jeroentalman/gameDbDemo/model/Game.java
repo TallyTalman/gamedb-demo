@@ -40,7 +40,7 @@ public class Game {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "systemId", referencedColumnName = "systemId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private System system;
+    private Gamingsystem gamingsystem;
 
     //getters and setters
     public Integer getGameId() {
@@ -91,11 +91,11 @@ public class Game {
         this.publisher = publisher;
     }
 
-    public System getSystem() {
-        return system;
+    public Gamingsystem getSystem() {
+        return gamingsystem;
     }
 
-    public void setSystem(System system) {
-        this.system = system;
+    public void setSystem(Gamingsystem gamingsystem) {
+        this.gamingsystem = gamingsystem;
     }
 }

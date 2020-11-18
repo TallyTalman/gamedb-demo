@@ -17,7 +17,7 @@ public class Manufacturer {
     private String name;
 
     @OneToMany(mappedBy = "manufacturer")
-    private List<System> mySystems;
+    private List<Gamingsystem> myGamingsystems;
 
     public Integer getManufacturerId() {
         return manufacturerId;
@@ -35,15 +35,15 @@ public class Manufacturer {
         this.name = name;
     }
 
-    public List<System> getMySystems() {
-        return mySystems;
+    public List<Gamingsystem> getMySystems() {
+        return myGamingsystems;
     }
 
-    public void setMySystems(List<System> mySystems) {
-        this.mySystems = mySystems;
+    public void setMySystems(List<Gamingsystem> myGamingsystems) {
+        this.myGamingsystems = myGamingsystems;
     }
 
     public int getNumberOfSystems() {
-        return mySystems.size();
+        return myGamingsystems.size();
     }
 }

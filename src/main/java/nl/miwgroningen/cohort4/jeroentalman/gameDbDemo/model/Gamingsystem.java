@@ -7,13 +7,13 @@ import javax.persistence.*;
 import java.util.List;
 
 /**
- * @author Jeroen Talman ( mail: j.k.talman@st.hanze.nl )
+ * @author Jeroen Talman <mail: j.k.talman@st.hanze.nl>
  *
  * model for object System (gaming systems/platforms)
  */
 
 @Entity
-public class System {
+public class Gamingsystem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
