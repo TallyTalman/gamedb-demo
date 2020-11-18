@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/library.css" />
+    <title>Create a new game</title>
+</head>
+<body>
+<h1>Create a new game</h1>
+<form th:action="@{/game/add}" th:object="${game}" method="post">
+    <p>Title: <input type="text" th:field="*{title}"/></p>
+    <p>
+        Developer:
+        <select th:field="*{developer}">
+            <option th:each="developer: ${allDevelopers}" th:value="${developer.developerId}" th:text="${developer.name}"></option>
+        </select>
+    </p>
+    <p>
+        Publisher:
+        <select th:field="*{publisher}">
+            <option th:each="publisher: ${allPublishers}" th:value="${publisher.publisherId}" th:text="${publisher.name}"></option>
+        </select>
+    </p>
+    <p>
+        Platform:
+        <select th:field="*{system}">
+            <option th:each="system: ${allSystems}" th:value="${system.systemId}" th:text="${system.name}"></option>
+        </select>
+    </p>
+    <p>
+        Genre:
+        <select th:field="*{genre}">
+            <option th:each="genre: ${allGenres}" th:value="${genre.genreId}" th:text="${genre.type}"></option>
+        </select>
+    </p>
+    <p><input type="submit" value="Submit" /></p>
+</form>
+</body>
+</html>

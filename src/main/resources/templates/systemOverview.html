@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/overview.css" />
+    <title>Gaming System overview</title>
+</head>
+<body>
+<h1>Systems</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Manufacturer</th>
+        <th>Year</th>
+        <th>#Games</th>
+    </tr>
+    <tr th:each="system: ${allSystems}">
+        <td th:text="${system.name}" />
+        <td th:text="${system.manufacturer.name}" />
+        <td th:text="${system.year}" />
+        <td th:text="${system.numberOfGames}" />
+    </tr>
+</table>
+
+<p>
+    <a th:href="@{/system/add}">Add System</a>
+</p>
+
+<p>
+    <a th:href="@{/games}">Games</a>
+</p>
+
+<p>
+    <a th:href="@{/developers}">Developers</a>
+</p>
+
+<p>
+    <a th:href="@{/publishers}">Publishers</a>
+</p>
+
+<p>
+    <a th:href="@{/genres}">Genres</a>
+</p>
+
+<p>
+    <a th:href="@{/manufacturers}">Manufacturers</a>
+
+</body>
+</html>

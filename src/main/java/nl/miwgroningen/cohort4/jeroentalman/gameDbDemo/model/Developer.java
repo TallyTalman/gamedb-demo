@@ -18,6 +18,8 @@ public class Developer {
 
     private String name;
 
+    private Integer yearFounded;
+
     private Boolean active;
 
     @OneToMany(mappedBy = "developer")
@@ -38,6 +40,14 @@ public class Developer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getYearFounded() {
+        return yearFounded;
+    }
+
+    public void setYearFounded(Integer yearFounded) {
+        this.yearFounded = yearFounded;
     }
 
     public Boolean getActive() {

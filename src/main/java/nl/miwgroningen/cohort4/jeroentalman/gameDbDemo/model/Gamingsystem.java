@@ -71,7 +71,7 @@ public class Gamingsystem {
         this.myGames = myGames;
     }
 
-    public int getNumberOfGame() {
+    public int getNumberOfGames() {
         return myGames.size();
     }
 }

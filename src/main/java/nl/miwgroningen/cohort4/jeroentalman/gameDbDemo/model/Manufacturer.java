@@ -16,6 +16,10 @@ public class Manufacturer {
 
     private String name;
 
+    private Integer yearFounded;
+
+    private Boolean active;
+
     @OneToMany(mappedBy = "manufacturer")
     private List<Gamingsystem> myGamingsystems;
 
@@ -35,11 +39,27 @@ public class Manufacturer {
         this.name = name;
     }
 
-    public List<Gamingsystem> getMySystems() {
+    public Integer getYearFounded() {
+        return yearFounded;
+    }
+
+    public void setYearFounded(Integer yearFounded) {
+        this.yearFounded = yearFounded;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public List<Gamingsystem> getMyGamingsystems() {
         return myGamingsystems;
     }
 
-    public void setMySystems(List<Gamingsystem> myGamingsystems) {
+    public void setMyGamingsystems(List<Gamingsystem> myGamingsystems) {
         this.myGamingsystems = myGamingsystems;
     }
 

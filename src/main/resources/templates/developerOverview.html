@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/overview.css" />
+    <title>Developer overview</title>
+</head>
+<body>
+<h1>Developers</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Year founded</th>
+        <th>Active</th>
+        <th>#Games</th>
+    </tr>
+    <tr th:each="developer: ${allDevelopers}">
+        <td th:text="${developer.name}" />
+        <td th:text="${developer.yearFounded}" />
+        <td th:text="${developer.active}" />
+        <td th:text="${developer.numberOfGames}" />
+    </tr>
+</table>
+
+<h1>Create a new developer</h1>
+<form th:action="@{/developer/add}" th:object="${developer}" method="post">
+    <p>
+        Name:
+        <input type="text" th:field="*{name}" />
+        <br>
+        Year founded:
+        <input type="number" th:field="*{yearFounded}" />
+        <br>
+        Still active:
+        <input type="checkbox" th:field="*{active}" />
+    </p>
+    <p>
+        <input type="submit" value="Submit" />
+    </p>
+</form>
+
+<p>
+    <a th:href="@{/games}">Games</a>
+</p>
+
+<p>
+    <a th:href="@{/publishers}">Publishers</a>
+</p>
+
+<p>
+    <a th:href="@{/systems}">Systems</a>
+</p>
+
+<p>
+    <a th:href="@{/genres}">Genres</a>
+</p>
+
+<p>
+    <a th:href="@{/manufacturers}">Manufacturers</a>
+
+</body>
+</html>
