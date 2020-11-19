@@ -5,7 +5,10 @@ import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * @author Jeroen Talman <mail: j.k.talman@st.hanze.nl>
@@ -34,7 +37,8 @@ public class GameController {
     @GetMapping("/games")
     protected String showGames(Model model) {
         model.addAttribute("allGames", gameRespository.findAll());
-        return "gameOverview";
+        model.addAttribute("game", new Game());
+        return "gameOverview2";
     }
 
     @GetMapping("/game/add")
@@ -45,5 +49,14 @@ public class GameController {
         model.addAttribute("allGenres", genreRepository.findAll());
         model.addAttribute("allSystems", gamingsystemRepository.findAll());
         return "gameForm";
+    }
+
+    @PostMapping("/game/add")
+    protected String saveOrUpdateGame(@ModelAttribute("game") Game game, BindingResult result) {
+        if (result.hasErrors()) {
+            return "gameOverview2";
+        }
+        gameRespository.save(game);
+        return "redirect:/games";
     }
 }

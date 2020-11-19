@@ -91,11 +91,11 @@ public class Game {
         this.publisher = publisher;
     }
 
-    public Gamingsystem getSystem() {
+    public Gamingsystem getGamingsystem() {
         return gamingsystem;
     }
 
-    public void setSystem(Gamingsystem gamingsystem) {
+    public void setGamingsystem(Gamingsystem gamingsystem) {
         this.gamingsystem = gamingsystem;
     }
 }

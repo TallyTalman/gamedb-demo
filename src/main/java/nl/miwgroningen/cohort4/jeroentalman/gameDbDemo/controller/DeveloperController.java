@@ -25,6 +25,7 @@ public class DeveloperController {
     @GetMapping("/developers")
     protected String showDevelopers(Model model) {
         model.addAttribute("allDevelopers", developerRepository.findAll());
+        model.addAttribute("developer", new Developer());
         return "developerOverview";
     }
 

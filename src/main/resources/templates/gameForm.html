@@ -9,29 +9,42 @@
 <body>
 <h1>Create a new game</h1>
 <form th:action="@{/game/add}" th:object="${game}" method="post">
-    <p>Title: <input type="text" th:field="*{title}"/></p>
+    <p>
+        Title: <input type="text" th:field="*{title}"/>
+    </p>
+    <p>
+        Year: <input type="number" th:field="*{year}"/>
+    </p>
     <p>
         Developer:
         <select th:field="*{developer}">
-            <option th:each="developer: ${allDevelopers}" th:value="${developer.developerId}" th:text="${developer.name}"></option>
+            <option th:each="developer: ${allDevelopers}"
+                    th:value="${developer.developerId}"
+                    th:text="${developer.name}"></option>
         </select>
     </p>
     <p>
         Publisher:
         <select th:field="*{publisher}">
-            <option th:each="publisher: ${allPublishers}" th:value="${publisher.publisherId}" th:text="${publisher.name}"></option>
+            <option th:each="publisher: ${allPublishers}"
+                    th:value="${publisher.publisherId}"
+                    th:text="${publisher.name}"></option>
         </select>
     </p>
     <p>
         Platform:
-        <select th:field="*{system}">
-            <option th:each="system: ${allSystems}" th:value="${system.systemId}" th:text="${system.name}"></option>
+        <select th:field="*{gamingsystem}">
+            <option th:each="system: ${allSystems}"
+                    th:value="${system.systemId}"
+                    th:text="${system.name}"></option>
         </select>
     </p>
     <p>
         Genre:
         <select th:field="*{genre}">
-            <option th:each="genre: ${allGenres}" th:value="${genre.genreId}" th:text="${genre.type}"></option>
+            <option th:each="genre: ${allGenres}"
+                    th:value="${genre.genreId}"
+                    th:text="${genre.type}"></option>
         </select>
     </p>
     <p><input type="submit" value="Submit" /></p>

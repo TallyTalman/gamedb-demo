@@ -1,5 +1,6 @@
 package nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.controller;
 
+import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.model.Developer;
 import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.model.Genre;
 import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class GenreController {
     @GetMapping("/genres")
     protected String showGenres(Model model) {
         model.addAttribute("allGenres", genreRepository.findAll());
+        model.addAttribute("genre", new Genre());
         return "genreOverview";
     }
 

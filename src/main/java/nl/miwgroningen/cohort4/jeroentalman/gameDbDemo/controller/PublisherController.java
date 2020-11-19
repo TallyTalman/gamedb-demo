@@ -1,5 +1,6 @@
 package nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.controller;
 
+import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.model.Developer;
 import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.model.Publisher;
 import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.repository.PublisherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class PublisherController {
     @GetMapping("/publishers")
     protected String showPublishers(Model model) {
         model.addAttribute("allPublishers", publisherRepository.findAll());
+        model.addAttribute("publisher", new Publisher());
         return "publisherOverview";
     }
 

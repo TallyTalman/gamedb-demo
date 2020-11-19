@@ -1,5 +1,6 @@
 package nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.controller;
 
+import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.model.Developer;
 import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.model.Manufacturer;
 import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.repository.ManufacturerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ public class ManufacturerController {
     @GetMapping("/manufacturers")
     protected String showManufacturers(Model model) {
         model.addAttribute("allManufacturers", manufacturerRepository.findAll());
+        model.addAttribute("manufacturer", new Manufacturer());
         return "manufacturerOverview";
     }
 
@@ -35,6 +37,6 @@ public class ManufacturerController {
             return "manufacturerOverview";
         }
         manufacturerRepository.save(manufacturer);
-        return "redirect:/manufacturer";
+        return "redirect:/manufacturers";
     }
 }

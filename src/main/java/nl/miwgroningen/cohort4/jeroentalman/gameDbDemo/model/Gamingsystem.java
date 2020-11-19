@@ -28,7 +28,7 @@ public class Gamingsystem {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Manufacturer manufacturer;
 
-    @OneToMany(mappedBy = "system")
+    @OneToMany(mappedBy = "gamingsystem")
     private List<Game> myGames;
 
     public Integer getSystemId() {
