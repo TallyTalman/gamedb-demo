@@ -38,6 +38,10 @@ public class GameController {
     protected String showGames(Model model) {
         model.addAttribute("allGames", gameRespository.findAll());
         model.addAttribute("game", new Game());
+        model.addAttribute("allDevelopers", developerRepository.findAll());
+        model.addAttribute("allPublishers", publisherRepository.findAll());
+        model.addAttribute("allGenres", genreRepository.findAll());
+        model.addAttribute("allSystems", gamingsystemRepository.findAll());
         return "gameOverview";
     }
 

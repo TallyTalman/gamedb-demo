@@ -22,6 +22,10 @@ public class Game {
 
     private Integer year;
 
+    private String imageUrl;
+
+    private String videoUrl;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "genreId", referencedColumnName = "genreId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -64,7 +68,26 @@ public class Game {
     }
 
     public void setYear(Integer year) {
+        if (year < 1970) {
+            throw new IllegalArgumentException("Year founded must be 1970 or greater");
+        }
         this.year = year;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
     public Genre getGenre() {

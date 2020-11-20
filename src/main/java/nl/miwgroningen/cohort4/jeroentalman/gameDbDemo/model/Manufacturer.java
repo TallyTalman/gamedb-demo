@@ -5,6 +5,8 @@ import java.util.List;
 
 /**
  * @author Jeroen Talman ( mail: j.k.talman@st.hanze.nl )
+ *
+ * Model for object Manufacturer of gamingsystems
  */
 
 @Entity
@@ -18,7 +20,7 @@ public class Manufacturer {
 
     private Integer yearFounded;
 
-    private Boolean active;
+    private Boolean active = false;
 
     @OneToMany(mappedBy = "manufacturer")
     private List<Gamingsystem> myGamingsystems;
@@ -44,6 +46,9 @@ public class Manufacturer {
     }
 
     public void setYearFounded(Integer yearFounded) {
+        if (yearFounded < 1880) {
+            throw new IllegalArgumentException("Year founded must be 1880 or greater");
+        }
         this.yearFounded = yearFounded;
     }
 
@@ -65,5 +70,9 @@ public class Manufacturer {
 
     public int getNumberOfSystems() {
         return myGamingsystems.size();
+    }
+
+    public String toString() {
+        return String.format("name: %s, founded in: %d, still active: %s", this.name, this.yearFounded, this.active);
     }
 }

@@ -48,4 +48,8 @@ public class Genre {
     public int getNumberOfGames() {
         return myGames.size();
     }
+
+    public String toString() {
+        return String.format("genre: %s", this.type);
+    }
 }

@@ -21,7 +21,7 @@ public class Gamingsystem {
 
     private String name;
 
-    private int year;
+    private Integer year;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "manufacturerId", referencedColumnName = "manufacturerId", nullable = false)
@@ -47,11 +47,14 @@ public class Gamingsystem {
         this.name = name;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
+        if (year < 1970) {
+            throw new IllegalArgumentException("Year founded must be 1970 or greater");
+        }
         this.year = year;
     }
 
@@ -73,5 +76,9 @@ public class Gamingsystem {
 
     public int getNumberOfGames() {
         return myGames.size();
+    }
+
+    public String toString() {
+        return String.format("Name system: %s, released in year: %d", this.name, this.year);
     }
 }

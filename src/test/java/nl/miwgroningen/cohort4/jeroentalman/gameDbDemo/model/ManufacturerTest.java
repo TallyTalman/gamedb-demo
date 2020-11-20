@@ -5,20 +5,20 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DeveloperTest {
+class ManufacturerTest {
 
-    Developer developer;
+    Manufacturer manufacturer;
 
     @BeforeEach
     void setUp() {
-        developer = new Developer();
+        manufacturer = new Manufacturer();
     }
 
     @Test
     void getName() {
         //arrange
         String expected = null;
-        String actual = developer.getName();
+        String actual = manufacturer.getName();
 
         //no act
 
@@ -30,19 +30,19 @@ class DeveloperTest {
     void setName() {
         //arrange
         String expected = "test";
-        developer.setName(expected);
+        manufacturer.setName(expected);
 
         //no act
 
         //assert
-        assertEquals(expected, developer.getName(), "Error setting name");
+        assertEquals(expected, manufacturer.getName(), "Error setting name");
     }
 
     @Test
     void getYearFounded() {
         //arrange
         Integer expected = null;
-        Integer actual = developer.getYearFounded();
+        Integer actual = manufacturer.getYearFounded();
 
         //no act
 
@@ -54,18 +54,18 @@ class DeveloperTest {
     void setYearFounded() {
         //arrange
         Integer expected = 2020;
-        developer.setYearFounded(expected);
+        manufacturer.setYearFounded(expected);
 
         //no act
 
         //assert
-        assertEquals(expected, developer.getYearFounded(), "Error setting year founded");
+        assertEquals(expected, manufacturer.getYearFounded(), "Error setting year founded");
     }
 
     @Test
     void setYearFoundedInvalid() {
         try {
-            developer.setYearFounded(1879);
+            manufacturer.setYearFounded(1879);
             fail("er had een foutmelding gegooid moeten worden");
         } catch (IllegalArgumentException exception) {
             System.out.println("foutmelding succesvol afgevangen");
@@ -78,7 +78,7 @@ class DeveloperTest {
     void getActive() {
         //arrange
         Boolean expected = false;
-        Boolean actual = developer.getActive();
+        Boolean actual = manufacturer.getActive();
 
         //no act
 
@@ -90,25 +90,25 @@ class DeveloperTest {
     void setActive() {
         //arrange
         Boolean expected = true;
-        developer.setActive(expected);
+        manufacturer.setActive(expected);
 
         //assert
-        assertEquals(expected, developer.getActive());
+        assertEquals(expected, manufacturer.getActive());
     }
 
     @Test
     void testToString() {
         //arrange
-        String name = "testdeveloper";
+        String name = "testmanufacturer";
         Integer year = 1997;
         Boolean active = true;
         String expected = String.format("name: %s, founded in: %d, still active: %s", name, year, active);
 
         //act
-        developer.setName(name);
-        developer.setYearFounded(year);
-        developer.setActive(active);
-        String resultaat = developer.toString();
+        manufacturer.setName(name);
+        manufacturer.setYearFounded(year);
+        manufacturer.setActive(active);
+        String resultaat = manufacturer.toString();
 
         //assert
         assertEquals(expected, resultaat);

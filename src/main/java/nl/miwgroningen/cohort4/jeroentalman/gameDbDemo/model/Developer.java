@@ -20,17 +20,10 @@ public class Developer {
 
     private Integer yearFounded;
 
-    private Boolean active;
+    private Boolean active = false;
 
     @OneToMany(mappedBy = "developer")
     private List<Game> myGames;
-
-    //contructor default
-    public Developer() {
-        this.name = "onbekend";
-        this.yearFounded = 0000;
-        this.active = true;
-    }
 
     //getters and setters
     public Integer getDeveloperId() {
@@ -54,6 +47,9 @@ public class Developer {
     }
 
     public void setYearFounded(Integer yearFounded) {
+        if (yearFounded < 1880) {
+            throw new IllegalArgumentException("Year founded must be 1880 or greater");
+        }
         this.yearFounded = yearFounded;
     }
 
@@ -75,5 +71,9 @@ public class Developer {
 
     public int getNumberOfGames() {
         return myGames.size();
+    }
+
+    public String toString() {
+        return String.format("name: %s, founded in: %d, still active: %s", this.name, this.yearFounded, this.active);
     }
 }

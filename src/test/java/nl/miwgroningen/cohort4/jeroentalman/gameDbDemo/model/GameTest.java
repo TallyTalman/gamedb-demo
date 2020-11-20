@@ -63,16 +63,70 @@ class GameTest {
     }
 
     @Test
+    void setYearInvalid() {
+        try {
+            game.setYear(1969);
+            fail("er had een foutmelding gegooid moeten worden");
+        } catch (IllegalArgumentException exception) {
+            System.out.println("foutmelding succesvol afgevangen");
+        } catch (Exception exception) {
+            fail("Hier had een specifieke foutmelding moeten staan");
+        }
+    }
+
+    @Test
+    void getImageUrl() {
+        //arrange
+        String expected = null;
+        String actual = game.getImageUrl();
+
+        //assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void setImageUrl() {
+        //arrange
+        String expected = "imageurl";
+        game.setImageUrl(expected);
+
+        //assert
+        assertEquals(expected, game.getImageUrl());
+    }
+
+    @Test
+    void getVideoUrl() {
+        //arrange
+        String expected = null;
+        String actual = game.getVideoUrl();
+
+        //assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void setVideoUrl() {
+        //arrange
+        String expected = "videourl";
+        game.setVideoUrl(expected);
+
+        //assert
+        assertEquals(expected, game.getVideoUrl());
+    }
+
+    @Test
     void testToString(){
         //arrange
         String title = "testgame";
         Integer year = 1997;
         String expected = String.format("%s, %d", title, year);
 
+        //act
         game.setTitle(title);
         game.setYear(year);
         String resultaat = game.toString();
 
+        //assert
         assertEquals(expected, resultaat);
     }
 }

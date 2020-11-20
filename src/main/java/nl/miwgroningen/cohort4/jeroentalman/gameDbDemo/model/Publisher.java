@@ -20,7 +20,7 @@ public class Publisher {
 
     private Integer yearFounded;
 
-    private Boolean active;
+    private Boolean active = false;
 
     @OneToMany(mappedBy = "publisher")
     private List<Game> myGames;
@@ -45,8 +45,10 @@ public class Publisher {
     public Integer getYearFounded() {
         return yearFounded;
     }
-
     public void setYearFounded(Integer yearFounded) {
+        if (yearFounded < 1880) {
+            throw new IllegalArgumentException("Year founded must be 1880 or greater");
+        }
         this.yearFounded = yearFounded;
     }
 
@@ -68,5 +70,9 @@ public class Publisher {
 
     public int getNumberOfGames() {
         return myGames.size();
+    }
+
+    public String toString() {
+        return String.format("name: %s, founded in: %d, still active: %s", this.name, this.yearFounded, this.active);
     }
 }

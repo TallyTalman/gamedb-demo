@@ -16,9 +16,8 @@ body#genres a#genresnav,
 body#systems a#systemsnav,
 body#manufacturers a#manufacturersnav {
     color: #b31414;
-    text-decoration: underline;
-    text-decoration: solid;
     font-weight: 800;
+    text-decoration: underline;
 }
 
 /* Style the header */
