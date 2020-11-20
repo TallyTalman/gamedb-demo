@@ -25,6 +25,13 @@ public class Developer {
     @OneToMany(mappedBy = "developer")
     private List<Game> myGames;
 
+    //contructor default
+    public Developer() {
+        this.name = "onbekend";
+        this.yearFounded = 0000;
+        this.active = true;
+    }
+
     //getters and setters
     public Integer getDeveloperId() {
         return developerId;

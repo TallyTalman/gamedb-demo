@@ -20,7 +20,7 @@ public class Game {
 
     private String title;
 
-    private int year;
+    private Integer year;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "genreId", referencedColumnName = "genreId", nullable = false)
@@ -59,11 +59,11 @@ public class Game {
         this.title = title;
     }
 
-    public int getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(Integer year) {
         this.year = year;
     }
 
@@ -97,5 +97,9 @@ public class Game {
 
     public void setGamingsystem(Gamingsystem gamingsystem) {
         this.gamingsystem = gamingsystem;
+    }
+
+    public String toString() {
+        return String.format("%s, %d", this.title, this.year);
     }
 }

@@ -38,7 +38,7 @@ public class GameController {
     protected String showGames(Model model) {
         model.addAttribute("allGames", gameRespository.findAll());
         model.addAttribute("game", new Game());
-        return "gameOverview2";
+        return "gameOverview";
     }
 
     @GetMapping("/game/add")
@@ -54,7 +54,7 @@ public class GameController {
     @PostMapping("/game/add")
     protected String saveOrUpdateGame(@ModelAttribute("game") Game game, BindingResult result) {
         if (result.hasErrors()) {
-            return "gameOverview2";
+            return "gameOverview";
         }
         gameRespository.save(game);
         return "redirect:/games";

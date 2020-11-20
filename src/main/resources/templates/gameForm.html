@@ -3,51 +3,135 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="/css/library.css" />
+    <link rel="stylesheet" type="text/css" href="/css/form.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.1/EQCSS-polyfills.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.1/EQCSS.min.js"></script>
+    <script>
+        // Apply eqcss on clicks, resizes, inputs
+        var EQCSS_resizing = false;
+        var EQCSS_timeout = true;
+        window.addEventListener("mousedown", function() {
+            EQCSS_resizing = true;
+            if(EQCSS_timeout == true) {
+                EQCSS.apply();
+            }
+            EQCSS_timeout = false;
+            setTimeout(function() {
+                EQCSS_timeout = true;
+            },250);
+        });
+        window.addEventListener("mouseup", function() {
+            EQCSS_resizing = false;
+            if(EQCSS_timeout == true) {
+                EQCSS.apply();
+            }
+            EQCSS_timeout = false;
+            setTimeout(function() {
+                EQCSS_timeout = true;
+            },250);
+        });
+        window.addEventListener("mousemove", function() {
+            if(EQCSS_resizing === true) {
+                if(EQCSS_timeout === true) {
+                    EQCSS.apply();
+                }
+                EQCSS_timeout = false;
+                setTimeout(function() {
+                    EQCSS_timeout = true;
+                },250);
+            }
+        });
+        window.addEventListener("keydown", function() {
+            if(EQCSS_timeout == true) {
+                EQCSS.apply();
+            }
+            EQCSS_timeout = false;
+            setTimeout(function() {
+                EQCSS_timeout = true;
+            },250);
+        });
+        window.addEventListener("keyup", function() {
+            if(EQCSS_timeout == true) {
+                EQCSS.apply();
+            }
+            EQCSS_timeout = false;
+            setTimeout(function() {
+                EQCSS_timeout = true;
+            },250);
+        });
+        window.addEventListener("input", function() {
+            if(EQCSS_timeout == true) {
+                EQCSS.apply();
+            }
+            EQCSS_timeout = false;
+            setTimeout(function() {
+                EQCSS_timeout = true;
+            },250);
+        });
+        setInterval(function() {
+            EQCSS.apply();
+        }, 1000);
+    </script>
     <title>Create a new game</title>
 </head>
 <body>
-<h1>Create a new game</h1>
-<form th:action="@{/game/add}" th:object="${game}" method="post">
-    <p>
-        Title: <input type="text" th:field="*{title}"/>
-    </p>
-    <p>
-        Year: <input type="number" th:field="*{year}"/>
-    </p>
-    <p>
-        Developer:
-        <select th:field="*{developer}">
+
+<div class="opening">
+    <span>addGame</span>
+</div>
+
+<div class="header">
+    <h1>Your game collection</h1>
+    <nav>
+        <a th:href="@{/games}" id="gamesnav">Games</a>
+        <a th:href="@{/developers}"id="developersnav">Developers</a>
+        <a th:href="@{/publishers}" id="publishersnav">Publishers</a>
+        <a th:href="@{/systems}" id="systemsnav">Systems</a>
+        <a th:href="@{/genres}" id="genresnav">Genres</a>
+        <a th:href="@{/manufacturers}" id="manufacturersnav">Manufacturers</a>
+    </nav>
+</div>
+
+<div class="form">
+    <form th:action="@{/game/add}" th:object="${game}" method="post">
+        <h3>Title:</h3>
+        <input type="text" id="title" th:field="*{title}" placeholder="Enter the game's title.." />
+        <h3>Year:</h3>
+        <input type="number" id="year" th:field="*{year}" placeholder="Enter the year of game's release.." />
+        <h3>Developer:</h3>
+        <select required th:field="*{developer}">
+            <option value="" selected>Select the game's developer</option>
             <option th:each="developer: ${allDevelopers}"
                     th:value="${developer.developerId}"
                     th:text="${developer.name}"></option>
         </select>
-    </p>
-    <p>
-        Publisher:
-        <select th:field="*{publisher}">
+        <h3>Publisher:</h3>
+        <select required th:field="*{publisher}">
+            <option value="" selected>Select the game's publisher</option>
             <option th:each="publisher: ${allPublishers}"
                     th:value="${publisher.publisherId}"
                     th:text="${publisher.name}"></option>
         </select>
-    </p>
-    <p>
-        Platform:
-        <select th:field="*{gamingsystem}">
+        <h3>Platform:</h3>
+        <select required th:field="*{gamingsystem}">
+            <option value="" selected>Select the game's platform</option>
             <option th:each="system: ${allSystems}"
                     th:value="${system.systemId}"
                     th:text="${system.name}"></option>
         </select>
-    </p>
-    <p>
-        Genre:
-        <select th:field="*{genre}">
+        <h3>Genre:</h3>
+        <select required th:field="*{genre}">
+            <option value="" selected>Select the game's genre</option>
             <option th:each="genre: ${allGenres}"
                     th:value="${genre.genreId}"
                     th:text="${genre.type}"></option>
         </select>
-    </p>
-    <p><input type="submit" value="Submit" /></p>
-</form>
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+<footer>
+    <br><br><br><br><br>
+</footer>
 </body>
 </html>

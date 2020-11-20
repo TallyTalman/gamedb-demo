@@ -1,9 +1,11 @@
-// '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+// '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom.
+// Here calculate the scrollbar width .
 $(window).on("load resize ", function() {
     var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
     $('.tbl-header').css({'padding-right':scrollWidth});
 }).resize();
 
+//sort table in overview by clicking headers
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("overview");
@@ -59,3 +61,43 @@ function sortTable(n) {
     }
 }
 
+//search in table for specific words
+function mySearch() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("mySearch");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("overview");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+}
+
+//auto expand textarea
+function adjust_textarea(h) {
+    h.style.height = "20px";
+    h.style.height = (h.scrollHeight)+"px";
+}
+
+//input number never zero
+const numInputs = document.querySelectorAll('input[type=number]')
+
+numInputs.forEach(function(input) {
+    input.addEventListener('change', function(e) {
+        if (e.target.value == '') {
+            e.target.value = 0
+        }
+    })
+})
+
+$(".selector").attr({
+    "type" : "number",
+});
