@@ -22,6 +22,8 @@ public class Publisher {
 
     private Boolean active = false;
 
+    private String logoUrl;
+
     @OneToMany(mappedBy = "publisher")
     private List<Game> myGames;
 
@@ -58,6 +60,14 @@ public class Publisher {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 
     public List<Game> getMyGames() {

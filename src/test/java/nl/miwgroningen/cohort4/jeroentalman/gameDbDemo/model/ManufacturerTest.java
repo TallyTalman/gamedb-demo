@@ -97,6 +97,26 @@ class ManufacturerTest {
     }
 
     @Test
+    void getLogoUrl() {
+        //arrange
+        String expected = null;
+        String actual = manufacturer.getLogoUrl();
+
+        //assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void setLogoUrl() {
+        //arrange
+        String expected = "testurl";
+        manufacturer.setLogoUrl(expected);
+
+        //assert
+        assertEquals(expected, manufacturer.getLogoUrl());
+    }
+
+    @Test
     void testToString() {
         //arrange
         String name = "testmanufacturer";

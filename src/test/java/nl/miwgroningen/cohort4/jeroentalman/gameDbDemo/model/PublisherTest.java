@@ -97,6 +97,26 @@ class PublisherTest {
     }
 
     @Test
+    void getLogoUrl() {
+        //arrange
+        String expected = null;
+        String actual = publisher.getLogoUrl();
+
+        //assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void setLogoUrl() {
+        //arrange
+        String expected = "testurl";
+        publisher.setLogoUrl(expected);
+
+        //assert
+        assertEquals(expected, publisher.getLogoUrl());
+    }
+
+    @Test
     void testToString() {
         //arrange
         String name = "testpublisher";
