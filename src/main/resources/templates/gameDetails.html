@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/overview.css" />
+    <script src="/javascript/table.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.1/EQCSS-polyfills.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.1/EQCSS.min.js"></script>
+    <script>
+        // Apply eqcss on clicks, resizes, inputs
+        var EQCSS_resizing = false;
+        var EQCSS_timeout = true;
+        window.addEventListener("mousedown", function() {
+            EQCSS_resizing = true;
+            if(EQCSS_timeout == true) {
+                EQCSS.apply();
+            }
+            EQCSS_timeout = false;
+            setTimeout(function() {
+                EQCSS_timeout = true;
+            },250);
+        });
+        window.addEventListener("mouseup", function() {
+            EQCSS_resizing = false;
+            if(EQCSS_timeout == true) {
+                EQCSS.apply();
+            }
+            EQCSS_timeout = false;
+            setTimeout(function() {
+                EQCSS_timeout = true;
+            },250);
+        });
+        window.addEventListener("mousemove", function() {
+            if(EQCSS_resizing === true) {
+                if(EQCSS_timeout === true) {
+                    EQCSS.apply();
+                }
+                EQCSS_timeout = false;
+                setTimeout(function() {
+                    EQCSS_timeout = true;
+                },250);
+            }
+        });
+        window.addEventListener("keydown", function() {
+            if(EQCSS_timeout == true) {
+                EQCSS.apply();
+            }
+            EQCSS_timeout = false;
+            setTimeout(function() {
+                EQCSS_timeout = true;
+            },250);
+        });
+        window.addEventListener("keyup", function() {
+            if(EQCSS_timeout == true) {
+                EQCSS.apply();
+            }
+            EQCSS_timeout = false;
+            setTimeout(function() {
+                EQCSS_timeout = true;
+            },250);
+        });
+        window.addEventListener("input", function() {
+            if(EQCSS_timeout == true) {
+                EQCSS.apply();
+            }
+            EQCSS_timeout = false;
+            setTimeout(function() {
+                EQCSS_timeout = true;
+            },250);
+        });
+        setInterval(function() {
+            EQCSS.apply();
+        }, 1000);
+    </script>
+    <title th:text="@{${game.title} + ' detail'}">Game details</title>
+</head>
+<body id="games">
+
+<div class="opening">
+    <span>gameDB</span>
+</div>
+
+<div class="header">
+    <h1>Your game collection</h1>
+    <nav>
+        <a th:href="@{/games}" id="gamesnav">Games</a>
+        <a th:href="@{/developers}"id="developersnav">Developers</a>
+        <a th:href="@{/publishers}" id="publishersnav">Publishers</a>
+        <a th:href="@{/systems}" id="systemsnav">Systems</a>
+        <a th:href="@{/genres}" id="genresnav">Genres</a>
+        <a th:href="@{/manufacturers}" id="manufacturersnav">Manufacturers</a>
+    </nav>
+</div>
+
+<div class="details" align="left">
+    <div class="details-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+                <tr>
+                    <th>Game info</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <table>
+        <tr>
+            <td class="row-title">Title</td>
+            <td class="row-info" th:text="${game.title}"></td>
+        </tr>
+        <tr>
+            <td class="row-title">Developer</td>
+            <td class="row-info" th:text="${game.developer.name}" />
+        </tr>
+        <tr>
+            <td class="row-title">Publisher</td>
+            <td class="row-info" th:text="${game.publisher.name}" />
+        </tr>
+        <tr>
+            <td class="row-title">Genre</td>
+            <td class="row-info" th:text="${game.genre.type}" />
+        </tr>
+        <tr>
+            <td class="row-title">Year</td>
+            <td class="row-info" th:text="${game.year}" />
+        </tr>
+        <tr>
+            <td class="row-title">Platform</td>
+            <td class="row-info" th:text="${game.gamingsystem.name}" />
+        </tr>
+</table>
+</div>
+
+<div class="media" align="right">
+    <div class="media-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th>Game media</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <table>
+        <tr>
+            <td class="row-title">Image</td>
+            <td class="image"><img width="100%" th:src="${game.imageUrl}"></td>
+        </tr>
+        <tr>
+            <td class="video_row">Video</td>
+            <td>
+                <div class="aspect-ratio">
+                    <iframe th:src="${game.videoUrl}" allowfullscreen></iframe>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<footer>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</footer>
+</body>
+</html>

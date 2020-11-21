@@ -20,7 +20,7 @@ public class Developer {
 
     private Integer yearFounded;
 
-    private Boolean active = false;
+    private Boolean active = true;
 
     @OneToMany(mappedBy = "developer")
     private List<Game> myGames;

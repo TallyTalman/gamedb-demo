@@ -8,7 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
 
 /**
  * @author Jeroen Talman <mail: j.k.talman@st.hanze.nl>
@@ -43,6 +46,16 @@ public class GameController {
         model.addAttribute("allGenres", genreRepository.findAll());
         model.addAttribute("allSystems", gamingsystemRepository.findAll());
         return "gameOverview";
+    }
+
+    @GetMapping("/game/{gameTitle}")
+    protected String showGameDetails(Model model, @PathVariable("gameTitle") String gameTitle){
+        Optional<Game> game = gameRespository.findByTitle(gameTitle);
+        if (game.isEmpty()) {
+            return "redirect:/games";
+        }
+        model.addAttribute("game", game.get());
+        return "gameDetails";
     }
 
     @GetMapping("/game/add")

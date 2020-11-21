@@ -77,7 +77,7 @@ class DeveloperTest {
     @Test
     void getActive() {
         //arrange
-        Boolean expected = false;
+        Boolean expected = true;
         Boolean actual = developer.getActive();
 
         //no act
@@ -89,7 +89,7 @@ class DeveloperTest {
     @Test
     void setActive() {
         //arrange
-        Boolean expected = true;
+        Boolean expected = false;
         developer.setActive(expected);
 
         //assert
@@ -101,7 +101,7 @@ class DeveloperTest {
         //arrange
         String name = "testdeveloper";
         Integer year = 1997;
-        Boolean active = true;
+        Boolean active = false;
         String expected = String.format("name: %s, founded in: %d, still active: %s", name, year, active);
 
         //act

@@ -136,7 +136,7 @@ table{
     margin-right: 1em;
 }
 
-th{
+.tbl-header th {
     padding: 20px 15px;
     text-align: left;
     font-weight: 500;
@@ -146,7 +146,7 @@ th{
     cursor: pointer;
 }
 
-td {
+.tbl-content td {
     padding: 15px;
     text-align: left;
     vertical-align: middle;
@@ -156,6 +156,104 @@ td {
     border-bottom: solid 1px rgb(210, 210, 210);
 }
 
+/* table style for details pages */
+.details {
+    width: 800px;
+    margin-top: 10em;
+    margin-left: 4em;
+    float: left;
+}
+
+.details-header{
+    background-color: #f54c4c;
+}
+
+.details-header th {
+    padding: 20px 15px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+    color: #f2f2f2;
+    text-transform: uppercase;
+}
+
+.details table {
+    width: 100%;
+}
+
+.media {
+    width: 800px;
+    margin-top: 10em;
+    margin-right: 4em;
+    float: right;
+}
+
+.media-header{
+    background-color: #f54c4c;
+}
+
+.media-header th {
+    padding: 20px 15px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+    color: #f2f2f2;
+    text-transform: uppercase;
+}
+
+.media table {
+    width: 100%;
+}
+
+.row-title {
+    background-color: #f54c4c;
+    color: #f2f2f2;
+    font-weight: 800;
+    text-align: center;
+    font-size: 16px;
+    width: 50%;
+    padding-top: 3.5em;
+    padding-bottom: 3.4em;
+    text-transform: uppercase;
+}
+
+.row-info {
+    color: rgb(31, 31, 31);
+    text-align: center;
+    font-size: 16px;
+}
+
+/*.image {*/
+/*    !*image-resolution: from-image;*!*/
+/*    !*size: portrait;*!*/
+/*    width: 50%;*/
+/*    height: auto;*/
+/*}*/
+
+.video_row {
+    background-color: #f54c4c;
+    color: #f2f2f2;
+    font-weight: 800;
+    text-align: center;
+    font-size: 16px;
+    width: 50%;
+    text-transform: uppercase;
+}
+
+.aspect-ratio {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+
+.aspect-ratio iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
 /* for custom scrollbar for webkit browser*/
 ::-webkit-scrollbar {
     width: 6px;

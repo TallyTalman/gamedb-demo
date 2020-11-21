@@ -74,7 +74,7 @@
             EQCSS.apply();
         }, 1000);
     </script>
-    <title>Game overview</title>
+    <title>gameDB: Game overview</title>
 </head>
 <body id="games">
 
@@ -117,12 +117,12 @@
     <table cellpadding="0" cellspacing="0" border="0" id="overview">
         <tbody>
         <tr th:each="game: ${allGames}">
-        <td th:text="${game.title}" />
-        <td th:text="${game.developer.name}" />
-        <td th:text="${game.publisher.name}" />
-        <td th:text="${game.genre.type}" />
-        <td th:text="${game.year}" />
-        <td th:text="${game.gamingsystem.name}" />
+            <td><a th:href="@{/game/{gameTitle}(gameTitle=${game.title})}" th:text="${game.title}" /></td>
+            <td th:text="${game.developer.name}" />
+            <td th:text="${game.publisher.name}" />
+            <td th:text="${game.genre.type}" />
+            <td th:text="${game.year}" />
+            <td th:text="${game.gamingsystem.name}" />
         </tr>
         </tbody>
     </table>
@@ -164,20 +164,17 @@
                     th:value="${genre.genreId}"
                     th:text="${genre.type}"></option>
         </select>
-        <h3>Cover:</h3>
-        <input type="text" id="image" th:field="*{imageUrl}" placeholder="Enter url of game cover.." />
-        <h3>Title:</h3>
-        <input type="text" id="video" th:field="*{videoUrl}" placeholder="Enter url of game trailer.." />
+        <h3>Game cover:</h3>
+        <input type="text" id="image" th:field="*{imageUrl}" placeholder="Enter url of game cover image.." />
+        <h3>Game trailer:</h3>
+        <input type="text" id="video" th:field="*{videoUrl}" placeholder="Enter url of embedded Youtube video.." />
         <input type="submit" value="Submit" />
     </form>
 </div>
 
-<!--<p>-->
-<!--    <a th:href="@{/game/add}">Add game</a>-->
-<!--</p>-->
-
 <footer>
     <br><br><br><br><br>
 </footer>
+
 </body>
 </html>
