@@ -101,3 +101,7 @@ numInputs.forEach(function(input) {
 $(".selector").attr({
     "type" : "number",
 });
+
+function scrollWin() {
+    window.scrollTo(0, 980);
+}

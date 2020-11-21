@@ -42,6 +42,14 @@ body#manufacturers a#manufacturersnav {
     color: #f2f2f2;
 }
 
+.skip-me {
+    display: none;
+}
+
+.unhide {
+    display: block;
+}
+
 .header {
     width: 100%;
     padding-top: 1em;
@@ -156,6 +164,46 @@ table{
     border-bottom: solid 1px rgb(210, 210, 210);
 }
 
+/* table styles for game list developer page */
+.dev-games-container {
+    width: 800px;
+    float: right;
+    margin-right: 4em;
+    margin-top: 10em;
+}
+
+.dev-games-header {
+    background-color: #f54c4c;
+    cursor: pointer;
+}
+
+.dev-games-header th {
+    padding: 20px 15px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+    color: #f2f2f2;
+    text-transform: uppercase;
+}
+
+.dev-games-content {
+    width:800px;
+    height:500px;
+    overflow-x:auto;
+    margin-top: 0px;
+    border: 1px solid rgb(210, 210, 210);
+}
+
+.dev-games-content td {
+    padding: 15px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 350;
+    font-size: 14px;
+    color: rgb(31, 31, 31);
+    border-bottom: solid 1px rgb(210, 210, 210);
+}
+
 /* table style for details pages */
 .details {
     width: 800px;
@@ -223,13 +271,6 @@ table{
     font-size: 16px;
 }
 
-/*.image {*/
-/*    !*image-resolution: from-image;*!*/
-/*    !*size: portrait;*!*/
-/*    width: 50%;*/
-/*    height: auto;*/
-/*}*/
-
 .video_row {
     background-color: #f54c4c;
     color: #f2f2f2;
@@ -254,6 +295,8 @@ table{
     left: 0;
     top: 0;
 }
+
+
 /* for custom scrollbar for webkit browser*/
 ::-webkit-scrollbar {
     width: 6px;
@@ -326,7 +369,6 @@ table{
     text-align: left;
     font-size: 16px;
 }
-
 
 .container input[type=number], select {
     width: 75%;
@@ -422,7 +464,6 @@ input:valid {
 .container input[type='checkbox'] + label > span{
     display: flex;
     justify-content: center;
-    /*align-items: center;*/
     margin-right: 1em;
     width: 1em;
     height: 1em;
@@ -467,13 +508,13 @@ input:valid {
 
 @keyframes shrink-bounce{
     0%{
-        transform: scale(1.2);
+        transform: scale(1.0);
     }
     33%{
         transform: scale(.85);
     }
     100%{
-        transform: scale(1.2);
+        transform: scale(1.0);
     }
 }
 @keyframes checkbox-check{

@@ -74,15 +74,15 @@
             EQCSS.apply();
         }, 1000);
     </script>
-    <title>Developer overview</title>
+    <title th:text="@{${developer.name} + ' detail'}">Game details</title>
 </head>
 <body id="developers" onload="scrollWin()">
 
- <div class="opening">
-     <span>gameDB</span>
- </div>
+<div class="opening">
+    <span>gameDB</span>
+</div>
 
- <div class="header">
+<div class="header">
     <h1>Your game collection</h1>
     <nav>
         <a th:href="@{/games}" id="gamesnav">Games</a>
@@ -94,63 +94,68 @@
     </nav>
 </div>
 
-<div class="searchBar">
-    <input type="text" id="mySearch" onkeyup="mySearch()" placeholder="Search.." title="Type in a keyword">
-</div>
-
-
-<div class="tbl-header">
-    <table cellpadding="0" cellspacing="0" border="0">
-        <thead>
+<div class="details" align="left">
+    <div class="details-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+            <tr>
+                <th>Developer info</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <table>
         <tr>
-            <th onclick="sortTable(0)">Name</th>
-            <th onclick="sortTable(1)">Year founded</th>
-            <th onclick="sortTable(2)">Active</th>
-            <th onclick="sortTable(3)">#Games</th>
+            <td class="row-title">Name</td>
+            <td class="row-info" th:text="${developer.name}"></td>
         </tr>
-        </thead>
-    </table>
-</div>
-<div class="tbl-content">
-    <table cellpadding="0" cellspacing="0" border="0" id="overview">
-        <tbody>
-        <tr th:each="developer: ${allDevelopers}">
-            <td><a th:href="@{/developer/{developerName}(developerName=${developer.name})}" th:text="${developer.name}" /></d>
-            <td th:text="${developer.yearFounded}" />
-            <td th:text="${developer.active}" />
-            <td th:text="${developer.numberOfGames}" />
+        <tr>
+            <td class="row-title">Year</td>
+            <td class="row-info" th:text="${developer.yearFounded}" />
         </tr>
-        </tbody>
+        <tr>
+            <td class="row-title">Active</td>
+            <td class="row-info" th:text="${developer.active}" />
+        </tr>
+        <tr>
+            <td class="row-title">Logo</td>
+            <td class="company-logo"><img width="100%" th:src="${developer.logoUrl}"></td>
+        </tr>
     </table>
 </div>
 
-
-<div class="container">
-    <h1>Add a developer</h1>
-    <form th:action="@{/developer/add}" th:object="${developer}" method="post">
-        <h3>Title:</h3>
-        <div class="name-field">
-        <input type="text" id="name" th:field="*{name}" placeholder="Enter the developer's name.." />
-        </div>
-        <h3>Year:</h3>
-        <input type="number" id="year" min="1880" max="2020" th:field="*{yearFounded}"
-               placeholder="Enter the year of developer's founding.." />
-        <h3>Company logo:</h3>
-        <input type="text" id="logo" th:field="*{logoUrl}" placeholder="Enter an url of the company logo.." />
-        <h3>Active:</h3>
-        <section>
-            <input id='one' type='checkbox' />
-            <label for='one'>
-                <span></span>
-                <a>Still developing games?</a>
-                <ins><i>Still developing games!</i></ins>
-            </label>
-        </section>
-        <input type="submit" value="Submit" />
-    </form>
+<div class="dev-games-container">
+    <div class="dev-games-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0)">Title</th>
+                    <th onclick="sortTable(1)">Publisher</th>
+                    <th onclick="sortTable(2)">Genre</th>
+                    <th onclick="sortTable(3)">Year</th>
+                    <th onclick="sortTable(4)">System</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="dev-games-content">
+        <table id="overview">
+            <tbody>
+            <tr th:each="game: ${developer.myGames}">
+                <td><a th:href="@{/game/{gameTitle}(gameTitle=${game.title})}" th:text="${game.title}" /></td>
+                <td th:text="${game.publisher.name}" />
+                <td th:text="${game.genre.type}" />
+                <td th:text="${game.year}" />
+                <td th:text="${game.gamingsystem.name}" />
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
+
 <footer>
-    <br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 </footer>
 </body>
 </html>

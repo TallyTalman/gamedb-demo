@@ -97,6 +97,26 @@ class DeveloperTest {
     }
 
     @Test
+    void getLogoUrl() {
+        //arrange
+        String expected = null;
+        String actual = developer.getLogoUrl();
+
+        //assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void setLogoUrl() {
+        //arrange
+        String expected = "testurl";
+        developer.setLogoUrl(expected);
+
+        //assert
+        assertEquals(expected, developer.getLogoUrl());
+    }
+
+    @Test
     void testToString() {
         //arrange
         String name = "testdeveloper";

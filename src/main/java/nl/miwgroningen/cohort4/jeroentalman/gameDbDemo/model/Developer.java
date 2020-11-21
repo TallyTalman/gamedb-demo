@@ -22,6 +22,8 @@ public class Developer {
 
     private Boolean active = true;
 
+    private String logoUrl;
+
     @OneToMany(mappedBy = "developer")
     private List<Game> myGames;
 
@@ -59,6 +61,14 @@ public class Developer {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 
     public List<Game> getMyGames() {

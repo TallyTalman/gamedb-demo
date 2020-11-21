@@ -1,6 +1,7 @@
 package nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.controller;
 
 import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.model.Developer;
+import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.model.Game;
 import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.repository.DeveloperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,7 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
 
 /**
  * @author Jeroen Talman <mail: j.k.talman@st.hanze.nl>
@@ -27,6 +31,16 @@ public class DeveloperController {
         model.addAttribute("allDevelopers", developerRepository.findAll());
         model.addAttribute("developer", new Developer());
         return "developerOverview";
+    }
+
+    @GetMapping("/developer/{developerName}")
+    protected String showGameDetails(Model model, @PathVariable("developerName") String developerName){
+        Optional<Developer> developer = developerRepository.findByName(developerName);
+        if (developer.isEmpty()) {
+            return "redirect:/developers";
+        }
+        model.addAttribute("developer", developer.get());
+        return "developerDetails";
     }
 
     @PostMapping("/developer/add")
