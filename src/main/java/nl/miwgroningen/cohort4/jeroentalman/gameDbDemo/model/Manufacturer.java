@@ -78,7 +78,7 @@ public class Manufacturer {
         this.myGamingsystems = myGamingsystems;
     }
 
-    public int getNumberOfSystems() {
+    public Integer getNumberOfSystems() {
         return myGamingsystems.size();
     }
 

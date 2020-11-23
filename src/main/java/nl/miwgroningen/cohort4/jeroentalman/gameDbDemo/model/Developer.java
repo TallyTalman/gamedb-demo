@@ -20,7 +20,7 @@ public class Developer {
 
     private Integer yearFounded;
 
-    private Boolean active = true;
+    private Boolean active = false;
 
     private String logoUrl;
 

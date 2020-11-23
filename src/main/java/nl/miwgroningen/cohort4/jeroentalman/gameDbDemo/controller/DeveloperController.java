@@ -4,6 +4,7 @@ import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.model.Developer;
 import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.model.Game;
 import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.repository.DeveloperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,6 +42,16 @@ public class DeveloperController {
         }
         model.addAttribute("developer", developer.get());
         return "developerDetails";
+    }
+
+    @Modifying
+    @PostMapping("/developer/update/{developerId}")
+    public String updateDeveloperById(@ModelAttribute("developer") Developer developer, BindingResult result) {
+        if (result.hasErrors()) {
+            return "redirect:/developers";
+        }
+        developerRepository.save(developer);
+        return "redirect:/developer/" + developer.getName();
     }
 
     @PostMapping("/developer/add")

@@ -2,10 +2,10 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="/css/overview.css" />
     <script src="/javascript/table.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js}"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.1/EQCSS-polyfills.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.1/EQCSS.min.js"></script>
     <script>
@@ -74,7 +74,7 @@
             EQCSS.apply();
         }, 1000);
     </script>
-    <title th:text="@{${game.title} + ' detail'}">Game details</title>
+    <title th:text="'gameDb: ' + @{${game.title}}">Game details</title>
 </head>
 <body id="games" onload="scrollWin()">
 
@@ -83,14 +83,14 @@
 </div>
 
 <div class="header">
-    <h1>Your game collection</h1>
+    <h1><a th:href="@{/home}" id="homenav">Your game collection</a></h1>
     <nav>
         <a th:href="@{/games}" id="gamesnav">Games</a>
         <a th:href="@{/developers}"id="developersnav">Developers</a>
         <a th:href="@{/publishers}" id="publishersnav">Publishers</a>
+        <a th:href="@{/manufacturers}" id="manufacturersnav">Manufacturers</a>
         <a th:href="@{/systems}" id="systemsnav">Systems</a>
         <a th:href="@{/genres}" id="genresnav">Genres</a>
-        <a th:href="@{/manufacturers}" id="manufacturersnav">Manufacturers</a>
     </nav>
 </div>
 
@@ -111,15 +111,21 @@
         </tr>
         <tr>
             <td class="row-title">Developer</td>
-            <td class="row-info" th:text="${game.developer.name}" />
+            <td class="row-info">
+                <a th:href="@{/developer/{developerName}(developerName=${game.developer.name})}"
+                   th:text="${game.developer.name}"/>
+            </td>
         </tr>
         <tr>
             <td class="row-title">Publisher</td>
-            <td class="row-info" th:text="${game.publisher.name}" />
+            <td class="row-info">
+                <a th:href="@{/publisher/{publisherName}(publisherName=${game.publisher.name})}"
+                   th:text="${game.publisher.name}"/>
+            </td>
         </tr>
         <tr>
             <td class="row-title">Genre</td>
-            <td class="row-info" th:text="${game.genre.type}" />
+            <td class="row-info"><a th:href="@{/genres}" th:text="${game.genre.type}"/></td>
         </tr>
         <tr>
             <td class="row-title">Year</td>
@@ -127,7 +133,10 @@
         </tr>
         <tr>
             <td class="row-title">Platform</td>
-            <td class="row-info" th:text="${game.gamingsystem.name}" />
+            <td class="row-info">
+                <a th:href="@{/system/{systemName}(systemName=${game.gamingsystem.name})}"
+                   th:text="${game.gamingsystem.name}"/>
+            </td>
         </tr>
 </table>
 </div>
@@ -157,6 +166,72 @@
         </tr>
     </table>
 </div>
+
+<section>
+    <div class="collapse-container">
+        <div class="collapse-header"><span>Edit game</span></div>
+        <div class="collapse-content">
+            <form th:action="@{/game/update/{gameId}(gameId=${game.gameId})}"
+                  th:object="${game}" method="post">
+                <h3>Title:</h3>
+                <input type="text" id="title" th:field="*{title}" placeholder="Enter the game's title.." />
+                <h3>Year:</h3>
+                <input type="number" id="year" th:field="*{year}" min="1970" max="2020"
+                       placeholder="Enter the year of game's release.." />
+                <h3>Developer:</h3>
+                <select required th:field="*{developer}">
+                    <option value="" selected>Select the game's developer</option>
+                    <option th:each="developer: ${allDevelopers}"
+                            th:value="${developer.developerId}"
+                            th:text="${developer.name}"></option>
+                </select>
+                <h3>Publisher:</h3>
+                <select required th:field="*{publisher}">
+                    <option value="" selected>Select the game's publisher</option>
+                    <option th:each="publisher: ${allPublishers}"
+                            th:value="${publisher.publisherId}"
+                            th:text="${publisher.name}"></option>
+                </select>
+                <h3>Platform:</h3>
+                <select required th:field="*{gamingsystem}">
+                    <option value="" selected>Select the game's platform</option>
+                    <option th:each="system: ${allSystems}"
+                            th:value="${system.systemId}"
+                            th:text="${system.name}"></option>
+                </select>
+                <h3>Genre:</h3>
+                <select required th:field="*{genre}">
+                    <option value="" selected>Select the game's genre</option>
+                    <option th:each="genre: ${allGenres}"
+                            th:value="${genre.genreId}"
+                            th:text="${genre.type}"></option>
+                </select>
+                <h3>Game cover:</h3>
+                <input type="text" id="image" th:field="*{imageUrl}" placeholder="Enter url of game cover image.." />
+                <h3>Game trailer:</h3>
+                <input type="text" id="video" th:field="*{videoUrl}" placeholder="Enter url of embedded Youtube video.." />
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+    <script>
+        $(".collapse-header").click(function() {
+
+        $header = $(this);
+        //getting the next element
+        $content = $header.next();
+        //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+        $content.slideToggle(500, function() {
+            //execute this after slideToggle is done
+            //change text of header based on visibility of content div
+            $header.text(function() {
+                //change text based on condition
+                return $content.is(":visible") ? "Edit game" : "Edit game";
+            });
+        });
+    });
+    </script>
+</section>
 
 <footer>
     <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

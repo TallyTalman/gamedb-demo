@@ -23,6 +23,8 @@ public class Gamingsystem {
 
     private Integer year;
 
+    private String logoUrl;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "manufacturerId", referencedColumnName = "manufacturerId", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -56,6 +58,14 @@ public class Gamingsystem {
             throw new IllegalArgumentException("Year founded must be 1970 or greater");
         }
         this.year = year;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 
     public Manufacturer getManufacturer() {

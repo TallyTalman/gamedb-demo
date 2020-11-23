@@ -75,9 +75,9 @@
             EQCSS.apply();
         }, 1000);
     </script>
-    <title th:text="'gameDb: ' + @{${developer.name}}">gameDb: Developer detail</title>
+    <title th:text="'gameDb: ' + @{${manufacturer.name}}">Manufacturer details</title>
 </head>
-<body id="developers" onload="scrollWin()">
+<body id="manufacturers" onload="scrollWin()">
 
 <div class="opening">
     <span>gameDB</span>
@@ -100,7 +100,7 @@
         <table cellpadding="0" cellspacing="0" border="0">
             <thead>
             <tr>
-                <th>Developer info</th>
+                <th>Manufacturer info</th>
             </tr>
             </thead>
         </table>
@@ -108,19 +108,19 @@
     <table>
         <tr>
             <td class="row-title">Name</td>
-            <td class="row-info" th:text="${developer.name}"></td>
+            <td class="row-info" th:text="${manufacturer.name}"></td>
         </tr>
         <tr>
             <td class="row-title">Year</td>
-            <td class="row-info" th:text="${developer.yearFounded}" />
+            <td class="row-info" th:text="${manufacturer.yearFounded}" />
         </tr>
         <tr>
             <td class="row-title">Active</td>
-            <td class="row-info" th:text="${developer.active}" />
+            <td class="row-info" th:text="${manufacturer.active}" />
         </tr>
         <tr>
             <td class="row-title">Logo</td>
-            <td class="company-logo"><img width="100%" th:src="${developer.logoUrl}"></td>
+            <td class="company-logo"><img width="100%" th:src="${manufacturer.logoUrl}"></td>
         </tr>
     </table>
 </div>
@@ -129,27 +129,20 @@
     <div class="dev-games-header">
         <table cellpadding="0" cellspacing="0" border="0">
             <thead>
-                <tr>
-                    <th onclick="sortTable(0)">Title</th>
-                    <th onclick="sortTable(1)">Publisher</th>
-                    <th onclick="sortTable(2)">Genre</th>
-                    <th onclick="sortTable(3)">Year</th>
-                    <th onclick="sortTable(4)">System</th>
-                </tr>
+            <tr>
+                <th onclick="sortTable(0)">Platforms</th>
+                <th onclick="sortTable(1)">Year</th>
+            </tr>
             </thead>
         </table>
     </div>
     <div class="dev-games-content">
         <table id="overview">
             <tbody>
-            <tr th:each="game: ${developer.myGames}">
-                <td><a th:href="@{/game/{gameTitle}(gameTitle=${game.title})}" th:text="${game.title}" /></td>
-                <td><a th:href="@{/publisher/{publisherName}(publisherName=${game.publisher.name})}"
-                       th:text="${game.publisher.name}"/></td>
-                <td th:href="@{/genres}" th:text="${game.genre.type}" />
-                <td th:text="${game.year}" />
-                <td><a th:href="@{/system/{systemName}(systemName=${game.gamingsystem.name})}"
-                       th:text="${game.gamingsystem.name}"/></td>
+            <tr th:each="gamingsystem: ${manufacturer.myGamingsystems}">
+                <td><a th:href="@{/system/{systemName}(systemName=${gamingsystem.name})}"
+                       th:text="${gamingsystem.name}" /></td>
+                <td th:text="${gamingsystem.year}" />
             </tr>
             </tbody>
         </table>
@@ -158,10 +151,10 @@
 
 <section>
     <div class="collapse-container">
-        <div class="collapse-header"><span>Edit developer</span></div>
+        <div class="collapse-header"><span>Edit manufacturer</span></div>
         <div class="collapse-content">
-            <form th:action="@{/developer/update/{developerId}(developerId=${developer.developerId})}"
-                  th:object="${developer}" method="post">
+            <form th:action="@{/manufacturer/update/{manufacturerId}(manufacturerId=${manufacturer.manufacturerId})}"
+                  th:object="${manufacturer}" method="post">
                 <h3>Name:</h3>
                 <div class="name-field">
                     <input type="text" id="name" th:field="*{name}" placeholder="Enter the developer's name.." />
@@ -194,7 +187,7 @@
                 //change text of header based on visibility of content div
                 $header.text(function() {
                     //change text based on condition
-                    return $content.is(":visible") ? "Edit developer" : "Edit developer";
+                    return $content.is(":visible") ? "Edit manufacturer" : "Edit manufacturer";
                 });
             });
         });

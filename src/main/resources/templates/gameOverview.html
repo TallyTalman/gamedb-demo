@@ -74,23 +74,23 @@
             EQCSS.apply();
         }, 1000);
     </script>
-    <title>gameDB: Game overview</title>
+    <title>gameDB: Games</title>
 </head>
-<body id="games">
+<body id="games" onload="scrollWin()">
 
 <div class="opening">
     <span>gameDB</span>
 </div>
 
 <div class="header">
-    <h1>Your game collection</h1>
+    <h1><a th:href="@{/home}" id="homenav">Your game collection</a></h1>
     <nav>
         <a th:href="@{/games}" id="gamesnav">Games</a>
         <a th:href="@{/developers}"id="developersnav">Developers</a>
         <a th:href="@{/publishers}" id="publishersnav">Publishers</a>
+        <a th:href="@{/manufacturers}" id="manufacturersnav">Manufacturers</a>
         <a th:href="@{/systems}" id="systemsnav">Systems</a>
         <a th:href="@{/genres}" id="genresnav">Genres</a>
-        <a th:href="@{/manufacturers}" id="manufacturersnav">Manufacturers</a>
     </nav>
 </div>
 
@@ -118,11 +118,14 @@
         <tbody>
         <tr th:each="game: ${allGames}">
             <td><a th:href="@{/game/{gameTitle}(gameTitle=${game.title})}" th:text="${game.title}" /></td>
-            <td th:text="${game.developer.name}" />
-            <td th:text="${game.publisher.name}" />
-            <td th:text="${game.genre.type}" />
+            <td><a th:href="@{/developer/{developerName}(developerName=${game.developer.name})}"
+                   th:text="${game.developer.name}"/></td>
+            <td><a th:href="@{/publisher/{publisherName}(publisherName=${game.publisher.name})}"
+                   th:text="${game.publisher.name}"/></td>
+            <td><a th:href="@{/genres}" th:text="${game.genre.type}"/></td>
             <td th:text="${game.year}" />
-            <td th:text="${game.gamingsystem.name}" />
+            <td><a th:href="@{/system/{systemName}(systemName=${game.gamingsystem.name})}"
+                   th:text="${game.gamingsystem.name}"/></td>
         </tr>
         </tbody>
     </table>

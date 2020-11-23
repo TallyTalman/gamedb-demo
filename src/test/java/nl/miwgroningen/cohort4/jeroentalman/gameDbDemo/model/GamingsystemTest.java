@@ -75,6 +75,26 @@ class GamingsystemTest {
     }
 
     @Test
+    void getLogoUrl() {
+        //arrange
+        String expected = null;
+        String actual = gamingsystem.getLogoUrl();
+
+        //assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void setLogoUrl() {
+        //arrange
+        String expected = "testurl";
+        gamingsystem.setLogoUrl(expected);
+
+        //assert
+        assertEquals(expected, gamingsystem.getLogoUrl());
+    }
+
+    @Test
     void testToString(){
         //arrange
         String name = "testsystem";

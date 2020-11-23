@@ -4,63 +4,151 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/overview.css" />
-    <title>Manufacturer overview</title>
+    <script src="/javascript/table.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.1/EQCSS-polyfills.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/eqcss/1.5.1/EQCSS.min.js"></script>
+    <script>
+        // Apply eqcss on clicks, resizes, inputs
+        var EQCSS_resizing = false;
+        var EQCSS_timeout = true;
+        window.addEventListener("mousedown", function() {
+            EQCSS_resizing = true;
+            if(EQCSS_timeout == true) {
+                EQCSS.apply();
+            }
+            EQCSS_timeout = false;
+            setTimeout(function() {
+                EQCSS_timeout = true;
+            },250);
+        });
+        window.addEventListener("mouseup", function() {
+            EQCSS_resizing = false;
+            if(EQCSS_timeout == true) {
+                EQCSS.apply();
+            }
+            EQCSS_timeout = false;
+            setTimeout(function() {
+                EQCSS_timeout = true;
+            },250);
+        });
+        window.addEventListener("mousemove", function() {
+            if(EQCSS_resizing === true) {
+                if(EQCSS_timeout === true) {
+                    EQCSS.apply();
+                }
+                EQCSS_timeout = false;
+                setTimeout(function() {
+                    EQCSS_timeout = true;
+                },250);
+            }
+        });
+        window.addEventListener("keydown", function() {
+            if(EQCSS_timeout == true) {
+                EQCSS.apply();
+            }
+            EQCSS_timeout = false;
+            setTimeout(function() {
+                EQCSS_timeout = true;
+            },250);
+        });
+        window.addEventListener("keyup", function() {
+            if(EQCSS_timeout == true) {
+                EQCSS.apply();
+            }
+            EQCSS_timeout = false;
+            setTimeout(function() {
+                EQCSS_timeout = true;
+            },250);
+        });
+        window.addEventListener("input", function() {
+            if(EQCSS_timeout == true) {
+                EQCSS.apply();
+            }
+            EQCSS_timeout = false;
+            setTimeout(function() {
+                EQCSS_timeout = true;
+            },250);
+        });
+        setInterval(function() {
+            EQCSS.apply();
+        }, 1000);
+    </script>
+    <title>gameDb: Manufacturers</title>
 </head>
-<body>
-<h1>Manufacturers</h1>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Year founded</th>
-        <th>Active</th>
-        <th>#Systems</th>
-    </tr>
-    <tr th:each="manufacturer: ${allManufacturers}">
-        <td th:text="${manufacturer.name}" />
-        <td th:text="${manufacturer.yearFounded}" />
-        <td th:text="${manufacturer.active}" />
-        <td th:text="${manufacturer.numberOfSystems}" />
-    </tr>
-</table>
+<body id="manufacturers" onload="scrollWin()">
 
-<h1>Create a new manufacturer</h1>
-<form th:action="@{/manufacturer/add}" th:object="${manufacturer}" method="post">
-    <p>
-        Name:
-        <input type="text" th:field="*{name}" />
-    </p>
-    <p>
-        Year founded:
-        <input type="number" th:field="*{yearFounded}" />
-    </p>
-    <p>
-        Still active:
-        <input type="checkbox" th:field="*{active}" />
-    </p>
-    <p>
+<div class="opening">
+    <span>gameDB</span>
+</div>
+
+<div class="header">
+    <h1><a th:href="@{/home}" id="homenav">Your game collection</a></h1>
+    <nav>
+        <a th:href="@{/games}" id="gamesnav">Games</a>
+        <a th:href="@{/developers}"id="developersnav">Developers</a>
+        <a th:href="@{/publishers}" id="publishersnav">Publishers</a>
+        <a th:href="@{/manufacturers}" id="manufacturersnav">Manufacturers</a>
+        <a th:href="@{/systems}" id="systemsnav">Systems</a>
+        <a th:href="@{/genres}" id="genresnav">Genres</a>
+    </nav>
+</div>
+
+<div class="searchBar">
+    <input type="text" id="mySearch" onkeyup="mySearch()" placeholder="Search.." title="Type in a keyword">
+</div>
+
+
+<div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+        <thead>
+        <tr>
+            <th onclick="sortTable(0)">Name</th>
+            <th onclick="sortTable(1)">Year founded</th>
+            <th onclick="sortTable(2)">Active</th>
+            <th onclick="sortTable(3)">#Systems</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0" id="overview">
+        <tbody>
+        <tr th:each="manufacturer: ${allManufacturers}">
+            <td><a th:href="@{/manufacturer/{manufacturerName}(manufacturerName=${manufacturer.name})}" th:text="${manufacturer.name}" /></td>
+            <td th:text="${manufacturer.yearFounded}" />
+            <td th:text="${manufacturer.active}" />
+            <td th:text="${manufacturer.numberOfSystems}" />
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<div class="container">
+    <h1>Add a manufacturer</h1>
+    <form th:action="@{/manufacturer/add}" th:object="${manufacturer}" method="post">
+        <h3>Name:</h3>
+        <div class="name-field">
+            <input type="text" id="name" th:field="*{name}" placeholder="Enter the manufacturer's name.." />
+        </div>
+        <h3>Founded:</h3>
+        <input type="number" id="year" min="1880" max="2020" th:field="*{yearFounded}"
+               placeholder="Enter the year of manufacturer's founding.." />
+        <h3>Company logo:</h3>
+        <input type="text" id="logo" th:field="*{logoUrl}" placeholder="Enter an url of the company logo.." />
+        <h3>Active:</h3>
+        <div class="set-active">
+            <label class="checkbox-style">Still in business?
+                <input type='checkbox' th:field="*{active}">
+                <span class="checkmark"></span>
+            </label>
+        </div>
         <input type="submit" value="Submit" />
-    </p>
-</form>
-
-<p>
-    <a th:href="@{/games}">Games</a>
-</p>
-
-<p>
-    <a th:href="@{/developers}">Developers</a>
-</p>
-
-<p>
-    <a th:href="@{/publishers}">Publishers</a>
-</p>
-
-<p>
-    <a th:href="@{/systems}">Systems</a>
-</p>
-
-<p>
-    <a th:href="@{/genres}">Genres</a>
-</p>
-
+    </form>
+</div>
+<footer>
+    <br><br><br><br><br>
+</footer>
 </body>
 </html>

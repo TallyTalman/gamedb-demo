@@ -105,3 +105,11 @@ $(".selector").attr({
 function scrollWin() {
     window.scrollTo(0, 980);
 }
+
+//function/script for collapsible button
+
+$(function(){
+    $("#clickMe").click(function(){
+        $("#para").toggleClass("myClickClass");
+    })
+});

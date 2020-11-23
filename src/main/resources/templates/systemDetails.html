@@ -75,9 +75,9 @@
             EQCSS.apply();
         }, 1000);
     </script>
-    <title th:text="'gameDb: ' + @{${developer.name}}">gameDb: Developer detail</title>
+    <title th:text="'gameDb: ' + @{${gamingsystem.name}}">Platform detail</title>
 </head>
-<body id="developers" onload="scrollWin()">
+<body id="systems" onload="scrollWin()">
 
 <div class="opening">
     <span>gameDB</span>
@@ -100,7 +100,7 @@
         <table cellpadding="0" cellspacing="0" border="0">
             <thead>
             <tr>
-                <th>Developer info</th>
+                <th>Platform info</th>
             </tr>
             </thead>
         </table>
@@ -108,19 +108,20 @@
     <table>
         <tr>
             <td class="row-title">Name</td>
-            <td class="row-info" th:text="${developer.name}"></td>
+            <td class="row-info" th:text="${gamingsystem.name}"></td>
         </tr>
         <tr>
-            <td class="row-title">Year</td>
-            <td class="row-info" th:text="${developer.yearFounded}" />
+            <td class="row-title">Manufacturer</td>
+            <td class="row-info"><a th:href="@{/system/{systemName}(systemName=${gamingsystem.manufacturer.name})}"
+                                    th:text="${gamingsystem.manufacturer.name}" /></td>
         </tr>
         <tr>
-            <td class="row-title">Active</td>
-            <td class="row-info" th:text="${developer.active}" />
+            <td class="row-title">Released</td>
+            <td class="row-info" th:text="${gamingsystem.year}" />
         </tr>
         <tr>
             <td class="row-title">Logo</td>
-            <td class="company-logo"><img width="100%" th:src="${developer.logoUrl}"></td>
+            <td class="company-logo"><img width="100%" th:src="${gamingsystem.logoUrl}"></td>
         </tr>
     </table>
 </div>
@@ -129,27 +130,27 @@
     <div class="dev-games-header">
         <table cellpadding="0" cellspacing="0" border="0">
             <thead>
-                <tr>
-                    <th onclick="sortTable(0)">Title</th>
-                    <th onclick="sortTable(1)">Publisher</th>
-                    <th onclick="sortTable(2)">Genre</th>
-                    <th onclick="sortTable(3)">Year</th>
-                    <th onclick="sortTable(4)">System</th>
-                </tr>
+            <tr>
+                <th onclick="sortTable(0)">Title</th>
+                <th onclick="sortTable(1)">Developer</th>
+                <th onclick="sortTable(2)">Publisher</th>
+                <th onclick="sortTable(3)">Genre</th>
+                <th onclick="sortTable(4)">Year</th>
+            </tr>
             </thead>
         </table>
     </div>
     <div class="dev-games-content">
         <table id="overview">
             <tbody>
-            <tr th:each="game: ${developer.myGames}">
+            <tr th:each="game: ${gamingsystem.myGames}">
                 <td><a th:href="@{/game/{gameTitle}(gameTitle=${game.title})}" th:text="${game.title}" /></td>
+                <td><a th:href="@{/developer/{developerName}(developerName=${game.developer.name})}"
+                       th:text="${game.developer.name}"/></td>
                 <td><a th:href="@{/publisher/{publisherName}(publisherName=${game.publisher.name})}"
                        th:text="${game.publisher.name}"/></td>
                 <td th:href="@{/genres}" th:text="${game.genre.type}" />
                 <td th:text="${game.year}" />
-                <td><a th:href="@{/system/{systemName}(systemName=${game.gamingsystem.name})}"
-                       th:text="${game.gamingsystem.name}"/></td>
             </tr>
             </tbody>
         </table>
@@ -158,26 +159,27 @@
 
 <section>
     <div class="collapse-container">
-        <div class="collapse-header"><span>Edit developer</span></div>
+        <div class="collapse-header"><span>Edit platform</span></div>
         <div class="collapse-content">
-            <form th:action="@{/developer/update/{developerId}(developerId=${developer.developerId})}"
-                  th:object="${developer}" method="post">
+            <form th:action="@{/system/update/{systemId}(systemId=${gamingsystem.systemId})}"
+                  th:object="${gamingsystem}" method="post">
                 <h3>Name:</h3>
                 <div class="name-field">
-                    <input type="text" id="name" th:field="*{name}" placeholder="Enter the developer's name.." />
+                    <input type="text" id="name" th:field="*{name}" placeholder="Enter the platform's name.." />
                 </div>
-                <h3>Founded:</h3>
-                <input type="number" id="year" min="1880" max="2020" th:field="*{yearFounded}"
-                       placeholder="Enter the year of developer's founding.." />
-                <h3>Company logo:</h3>
-                <input type="text" id="logo" th:field="*{logoUrl}" placeholder="Enter an url of the company logo.." />
-                <h3>Active:</h3>
-                <div class="set-active">
-                    <label class="checkbox-style">Still in business?
-                        <input type='checkbox' th:field="*{active}">
-                        <span class="checkmark"></span>
-                    </label>
-                </div>
+                <h3>Manufacturer:</h3>
+                <select required th:field="*{manufacturer}">
+                    <option value="" selected>Select the platform's manufacturer</option>
+                    <option th:each="manufacturer: ${allManufacturers}"
+                            th:value="${manufacturer.manufacturerId}"
+                            th:text="${manufacturer.name}"></option>
+                </select>
+                <h3>Released:</h3>
+                <input type="number" id="year" min="1880" max="2020" th:field="*{year}"
+                       placeholder="Enter the year of platform's release.." />
+                <h3>Platform logo:</h3>
+                <input type="text" id="logo" th:field="*{logoUrl}"
+                       placeholder="Enter an url of the platform's logo.." />
                 <input type="submit" value="Submit" />
             </form>
         </div>
@@ -194,7 +196,7 @@
                 //change text of header based on visibility of content div
                 $header.text(function() {
                     //change text based on condition
-                    return $content.is(":visible") ? "Edit developer" : "Edit developer";
+                    return $content.is(":visible") ? "Edit platform" : "Edit platform";
                 });
             });
         });

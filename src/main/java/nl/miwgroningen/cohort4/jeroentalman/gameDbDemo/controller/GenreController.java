@@ -1,6 +1,7 @@
 package nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.controller;
 
 import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.model.Developer;
+import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.model.Gamingsystem;
 import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.model.Genre;
 import nl.miwgroningen.cohort4.jeroentalman.gameDbDemo.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
 
 /**
  * @author Jeroen Talman <mail: j.k.talman@st.hanze.nl>
