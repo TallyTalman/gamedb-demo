@@ -81,6 +81,6 @@ public class GameController {
             return "gameOverview";
         }
         gameRespository.save(game);
-        return "redirect:/games";
+        return "redirect:/game/" + game.getTitle();
     }
 }

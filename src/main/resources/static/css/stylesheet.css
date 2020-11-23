@@ -225,7 +225,7 @@ table{
     width: 900px;
     float: right;
     margin-right: 4em;
-    margin-top: 10em;
+    margin-top: 8em;
 }
 
 .dev-games-header {
@@ -274,7 +274,7 @@ table{
 /* table style for details pages */
 .details {
     width: 800px;
-    margin-top: 10em;
+    margin-top: 8em;
     margin-left: 4em;
     float: left;
 }
@@ -298,7 +298,7 @@ table{
 
 .media {
     width: 800px;
-    margin-top: 10em;
+    margin-top: 8em;
     margin-right: 4em;
     float: right;
 }

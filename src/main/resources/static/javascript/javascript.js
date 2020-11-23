@@ -5,7 +5,7 @@ $(window).on("load resize ", function() {
     $('.tbl-header').css({'padding-right':scrollWidth});
 }).resize();
 
-//sort table in overview by clicking headers
+//sort table in overview by clicking headers. sort rows per each column
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
     table = document.getElementById("overview");
@@ -61,7 +61,7 @@ function sortTable(n) {
     }
 }
 
-//search in table for specific words
+//live search in table
 function mySearch() {
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("mySearch");
@@ -102,14 +102,7 @@ $(".selector").attr({
     "type" : "number",
 });
 
+//moves to set point when loading page
 function scrollWin() {
     window.scrollTo(0, 980);
 }
-
-//function/script for collapsible button
-
-$(function(){
-    $("#clickMe").click(function(){
-        $("#para").toggleClass("myClickClass");
-    })
-});
